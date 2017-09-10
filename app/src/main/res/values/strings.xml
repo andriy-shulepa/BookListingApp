@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">BookListingApp</string>
+
+    <string name="keyword_hint">Enter keyword to search</string>
+    <string name="quantity_hint">Enter maximum number of results</string>
+    <string name="search">Search</string>
+    <string name="no_results">No books found for you query.</string>
+    <string name="no_internet">Failed to connect to the network. Please, try again.</string>
+</resources>

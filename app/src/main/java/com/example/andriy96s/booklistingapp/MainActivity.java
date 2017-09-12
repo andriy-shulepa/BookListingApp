@@ -23,6 +23,7 @@ public class MainActivity extends FragmentActivity implements SearchFragment.Sea
     }
 
     public void buttonClicked (String url) {
+
         if(findViewById(R.id.book_list_container)==null) {
             Intent intent = new Intent(this, BookListActivity.class);
             intent.putExtra(EXTRA_URL, url);

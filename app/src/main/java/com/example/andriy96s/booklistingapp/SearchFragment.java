@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.Formatter;
 
@@ -50,9 +51,14 @@ public class SearchFragment extends Fragment {
                 View view = v.getRootView();
                 EditText keyword = view.findViewById(R.id.keyword_edit_text);
                 EditText quantity = view.findViewById(R.id.quantity_edit_text);
-                Formatter f = new Formatter();
-                f.format("https://www.googleapis.com/books/v1/volumes?q=%s&maxResults=%d",keyword.getText().toString().replace(" ",""),Integer.parseInt(quantity.getText().toString()));
-                clicked.buttonClicked(f.toString());
+                try {
+                    Formatter f = new Formatter();
+                    f.format("https://www.googleapis.com/books/v1/volumes?q=%s&maxResults=%d", keyword.getText().toString().replace(" ", ""), Integer.parseInt(quantity.getText().toString()));
+                    clicked.buttonClicked(f.toString());
+                } catch (NumberFormatException e) {
+                    Toast toast = Toast.makeText(getContext(),R.string.invalid_number,Toast.LENGTH_SHORT);
+                    toast.show();
+                }
             }
         });
         return view;

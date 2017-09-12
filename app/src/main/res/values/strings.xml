@@ -7,4 +7,5 @@
     <string name="no_results">No books found for you query.</string>
     <string name="no_internet">Failed to connect to the network. Please, try again.</string>
     <string name="invalid_number">Invalid number. Please, try again.</string>
+    <string name="empty_keyword">You keyword field is empty. Please, fill it with your query.</string>
 </resources>

@@ -51,13 +51,18 @@ public class SearchFragment extends Fragment {
                 View view = v.getRootView();
                 EditText keyword = view.findViewById(R.id.keyword_edit_text);
                 EditText quantity = view.findViewById(R.id.quantity_edit_text);
+                if (keyword.getText().toString().isEmpty()) {
+                    Toast keywordToast = Toast.makeText(getContext(),R.string.empty_keyword,Toast.LENGTH_SHORT);
+                    keywordToast.show();
+                    return;
+                }
                 try {
                     Formatter f = new Formatter();
                     f.format("https://www.googleapis.com/books/v1/volumes?q=%s&maxResults=%d", keyword.getText().toString().replace(" ", ""), Integer.parseInt(quantity.getText().toString()));
                     clicked.buttonClicked(f.toString());
                 } catch (NumberFormatException e) {
-                    Toast toast = Toast.makeText(getContext(),R.string.invalid_number,Toast.LENGTH_SHORT);
-                    toast.show();
+                    Toast quantityToast = Toast.makeText(getContext(),R.string.invalid_number,Toast.LENGTH_SHORT);
+                    quantityToast.show();
                 }
             }
         });

@@ -4,10 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -32,10 +36,13 @@ public class SearchFragment extends Fragment {
     public static SearchFragment newInstance() {
         return new SearchFragment();
     }
+    Animation shake;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
 
     }
 
@@ -54,6 +61,7 @@ public class SearchFragment extends Fragment {
                 if (keyword.getText().toString().isEmpty()) {
                     Toast keywordToast = Toast.makeText(getContext(),R.string.empty_keyword,Toast.LENGTH_SHORT);
                     keywordToast.show();
+                    shakeButton();
                     return;
                 }
                 try {
@@ -63,6 +71,7 @@ public class SearchFragment extends Fragment {
                 } catch (NumberFormatException e) {
                     Toast quantityToast = Toast.makeText(getContext(),R.string.invalid_number,Toast.LENGTH_SHORT);
                     quantityToast.show();
+                    shakeButton();
                 }
             }
         });
@@ -84,6 +93,14 @@ public class SearchFragment extends Fragment {
 
     interface SearchButtonClicked {
          void buttonClicked (String url);
+    }
+
+    private void shakeButton () {
+        Animation shake= AnimationUtils.loadAnimation(getContext(),R.anim.shake);
+        Vibrator v = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+        Button button = getActivity().findViewById(R.id.search_button);
+        button.startAnimation(shake);
+        v.vibrate(150);
     }
 
 }
